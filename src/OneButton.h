@@ -44,6 +44,7 @@ public:
 
   // attach functions that will be called when button was pressed in the specified way.
   void attachClick(callbackFunction newFunction);
+  void attachOnClick(callbackFunction newFunction);
   void attachDoubleClick(callbackFunction newFunction);
   void attachPress(callbackFunction newFunction); // DEPRECATED, replaced by longPressStart, longPressStop and duringLongPress
   void attachLongPressStart(callbackFunction newFunction);
@@ -69,6 +70,7 @@ private:
 
   // These variables will hold functions acting as event source.
   callbackFunction _clickFunc;
+  callbackFunction _onClickFunc;
   callbackFunction _doubleClickFunc;
   callbackFunction _pressFunc;
   callbackFunction _longPressStartFunc;

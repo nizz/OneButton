@@ -42,6 +42,7 @@ OneButton::OneButton(int pin, int activeLow)
 
   // no functions attached yet: clear all function pointers.
   _clickFunc = NULL;
+  _onClickFunc = NULL;
   _doubleClickFunc = NULL;
   _pressFunc = NULL;
   _longPressStartFunc = NULL;
@@ -73,6 +74,11 @@ void OneButton::attachClick(callbackFunction newFunction)
   _clickFunc = newFunction;
 } // attachClick
 
+// save function for click event (on start)
+void OneButton::attachOnClick(callbackFunction newFunction)
+{
+  _onClickFunc = newFunction;
+} // attachOnClick
 
 // save function for doubleClick event
 void OneButton::attachDoubleClick(callbackFunction newFunction)
@@ -122,6 +128,7 @@ void OneButton::tick(void)
     if (buttonLevel == _buttonPressed) {
       _state = 1; // step to state 1
       _startTime = now; // remember starting time
+      if (_onClickFunc) _onClickFunc();      
     } // if
 
   } else if (_state == 1) { // waiting for menu pin being released.
